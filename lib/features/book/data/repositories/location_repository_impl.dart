@@ -19,8 +19,8 @@ class LocationRepositoryImpl implements LocationRepository {
     if (locationData.latitude != null && locationData.longitude != null) {
       return LocationModel(
         latLng: LatLng(locationData.latitude!, locationData.longitude!),
-        address: "Current Location", // ✅ Default value
-        placeId: "", // ✅ Empty placeId for current location
+        address: "Current Location", 
+        placeId: "", 
       );
     }
     return null;
@@ -34,9 +34,9 @@ class LocationRepositoryImpl implements LocationRepository {
       final data = json.decode(response.body);
       return (data['predictions'] as List)
           .map((e) => LocationModel(
-                latLng: LatLng(0, 0), // Placeholder LatLng (coordinates fetched later)
+                latLng: LatLng(0, 0), 
                 address: e['description'],
-                placeId: e['place_id'], // ✅ Store place_id
+                placeId: e['place_id'], 
               ))
           .toList();
     }
@@ -54,8 +54,8 @@ class LocationRepositoryImpl implements LocationRepository {
           data['result']['geometry']['location']['lat'],
           data['result']['geometry']['location']['lng'],
         ),
-        address: data['result']['formatted_address'], // ✅ Get full address
-        placeId: placeId, // ✅ Store placeId
+        address: data['result']['formatted_address'],
+        placeId: placeId, 
       );
     }
     return null;
