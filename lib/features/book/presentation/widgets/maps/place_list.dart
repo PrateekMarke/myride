@@ -20,14 +20,14 @@ class PlaceListWidget extends StatelessWidget {
               itemCount: placeList.length,
               itemBuilder: (context, index) {
                 return ListTile(
-                  title: Text(placeList[index].address), // ✅ Uses address field
+                  title: Text(placeList[index].address),
                   onTap: () async {
                     final locationRepo = LocationRepositoryImpl();
-                    final locationEntity = await locationRepo.getCoordinates(placeList[index].placeId); // ✅ Use .placeId instead of ["place_id"]
+                    final locationEntity = await locationRepo.getCoordinates(placeList[index].placeId); 
 
                     if (locationEntity != null) {
-                      onLocationSelected(locationEntity.latLng, placeList[index].address); // ✅ Use .address instead of ["description"]
-                    }
+                      onLocationSelected(locationEntity.latLng, placeList[index].address); 
+                   
                   },
                 );
               },
