@@ -1,26 +1,21 @@
 
-
-
-
-
-
 import 'package:latlong2/latlong.dart';
 import 'package:myride/features/book/domain/entities/location_entity.dart';
 
 class LocationModel extends LocationEntity {
-  final String placeId; // ✅ Add placeId field
+  final String placeId; 
 
   LocationModel({
     required LatLng latLng,
     String? address,
-    required this.placeId, // ✅ Store placeId
+    required this.placeId, 
   }) : super(latLng: latLng, address: address);
 
   factory LocationModel.fromJson(Map<String, dynamic> json) {
     return LocationModel(
       latLng: LatLng(json['lat'], json['lng']),
       address: json['address'],
-      placeId: json['place_id'] ?? "", // ✅ Parse place_id from JSON
+      placeId: json['place_id'] ?? "", 
     );
   }
 
@@ -29,7 +24,7 @@ class LocationModel extends LocationEntity {
       'lat': latLng.latitude,
       'lng': latLng.longitude,
       'address': address,
-      'place_id': placeId, // ✅ Include placeId in toJson()
+      'place_id': placeId, 
     };
   }
 }
