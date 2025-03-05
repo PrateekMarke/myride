@@ -55,6 +55,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       _controller.text = address;
       _placeList = [];
     });
+
     widget.onLocationSelected(location, address);
   }
 
@@ -78,7 +79,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                 icon: Icon(Icons.cancel, color: Colors.grey),
                 onPressed: () {
                   _controller.clear();
-                  if (!mounted) return; 
                   setState(() => _placeList = []);
                 },
               ),

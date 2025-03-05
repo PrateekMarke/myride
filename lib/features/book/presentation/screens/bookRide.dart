@@ -2,11 +2,28 @@ import 'package:flutter/material.dart';
 import 'package:myride/features/book/presentation/screens/maps/mapscreen.dart';
 import 'package:myride/features/book/presentation/widgets/customTimeline.dart';
 
-
-
-
-class BookRideScreen extends StatelessWidget {
+class BookRideScreen extends StatefulWidget {
   const BookRideScreen({super.key});
+
+  @override
+  State<BookRideScreen> createState() => _BookRideScreenState();
+}
+
+class _BookRideScreenState extends State<BookRideScreen> {
+  TextEditingController _pickupController = TextEditingController();
+  TextEditingController _dropoffController = TextEditingController();
+
+  void _setPickupLocation(String location) {
+    setState(() {
+      _pickupController.text = location;
+    });
+  }
+
+  void _setDropoffLocation(String location) {
+    setState(() {
+      _dropoffController.text = location;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,8 +40,9 @@ class BookRideScreen extends StatelessWidget {
           children: [
             CustomTimeline(),
             SizedBox(height: 20),
-            Text('Pick up Location :', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('Pick-up Location:', style: TextStyle(fontWeight: FontWeight.bold)),
             TextField(
+              controller: _pickupController,
               decoration: InputDecoration(
                 hintText: 'Enter a Pickup Location',
                 filled: true,
@@ -34,13 +52,21 @@ class BookRideScreen extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context) => MapScreen(onLocationSelected: (String ) {  },)));
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MapScreen(
+                      onLocationSelected: _setPickupLocation,
+                    ),
+                  ),
+                );
               },
             ),
             SizedBox(height: 20),
-            Text('Drop Location :', style: TextStyle(fontWeight: FontWeight.bold)),
+            Text('Drop-off Location:', style: TextStyle(fontWeight: FontWeight.bold)),
             TextField(
+              controller: _dropoffController,
               decoration: InputDecoration(
                 hintText: 'Enter a Drop Location',
                 filled: true,
@@ -50,6 +76,16 @@ class BookRideScreen extends StatelessWidget {
                   borderSide: BorderSide.none,
                 ),
               ),
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => MapScreen(
+                      onLocationSelected: _setDropoffLocation,
+                    ),
+                  ),
+                );
+              },
             ),
             SizedBox(height: 20),
             ElevatedButton(

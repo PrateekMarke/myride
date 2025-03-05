@@ -7,7 +7,7 @@ import 'package:myride/features/book/presentation/widgets/maps/search_bar.dart';
 
 class MapScreen extends StatefulWidget {
   final Function(String) onLocationSelected;
-  
+
   const MapScreen({super.key, required this.onLocationSelected});
 
   @override
@@ -38,18 +38,19 @@ class _MapScreenState extends State<MapScreen> {
     }
   }
 
- void _updateLocation(LatLng newLocation, String address) {
-  setState(() {
-    _searchedLocation = newLocation;
-    _selectedAddress = address;
-  });
+  void _updateLocation(LatLng newLocation, String address) {
+    setState(() {
+      _searchedLocation = newLocation;
+      _selectedAddress = address;
+    });
 
-  Future.delayed(Duration(milliseconds: 100), () {
-    _mapController.move(newLocation, 15); 
-  });
+    Future.delayed(Duration(milliseconds: 100), () {
+      _mapController.move(newLocation, 15);
+    });
 
-  widget.onLocationSelected(address);
-}
+    widget.onLocationSelected(address);
+    Navigator.pop(context);
+  }
 
   void _moveToCurrentLocation() {
     if (_currentLocation != null) {
@@ -60,7 +61,7 @@ class _MapScreenState extends State<MapScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('Map'), backgroundColor: Colors.yellow, centerTitle: true),
+      appBar: AppBar(title: Text('Select Location'), backgroundColor: Colors.yellow, centerTitle: true),
       body: Stack(
         children: [
           FlutterMap(
@@ -85,9 +86,7 @@ class _MapScreenState extends State<MapScreen> {
                 ),
             ],
           ),
-         SearchBarWidget(
-  onLocationSelected: _updateLocation,
-),
+          SearchBarWidget(onLocationSelected: _updateLocation),
           Positioned(
             bottom: 20,
             right: 15,

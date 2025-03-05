@@ -28,7 +28,7 @@ class PlaceListWidget extends StatelessWidget {
                     if (locationEntity != null) {
                       onLocationSelected(locationEntity.latLng, placeList[index].address); 
                    
-                  },
+                  }},
                 );
               },
             ),
